@@ -1,4 +1,5 @@
 ﻿using Eto.Forms;
+using ImageBlossoms.ViewModels;
 using ImageBlossoms.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -14,6 +15,8 @@ namespace ImageBlossoms
 			{
 				// Views
 				services.AddSingleton<MainForm>();
+				// ViewModels
+				services.AddSingleton<MainFormViewModel>();
 			})
 			.Build();
 
