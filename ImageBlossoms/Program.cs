@@ -1,15 +1,27 @@
-﻿using Eto.Drawing;
-using Eto.Forms;
+﻿using Eto.Forms;
+using ImageBlossoms.Views;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 
 namespace ImageBlossoms
 {
 	internal class Program
 	{
+		private static readonly IHost _host = Host
+			.CreateDefaultBuilder()
+			.ConfigureServices((context, services) =>
+			{
+				// Views
+				services.AddSingleton<MainForm>();
+			})
+			.Build();
+
 		[STAThread]
 		static void Main(string[] args)
 		{
-			new Application(Eto.Platform.Detect).Run(new MainForm());
+			IServiceProvider provider = _host.Services;
+			new Application(Eto.Platform.Detect).Run(provider.GetRequiredService<MainForm>());
 		}
 	}
 }

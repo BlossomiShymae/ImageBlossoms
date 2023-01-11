@@ -1,7 +1,7 @@
 using Eto.Drawing;
 using Eto.Forms;
 
-namespace ImageBlossoms
+namespace ImageBlossoms.Views
 {
 	public partial class MainForm : Form
 	{
