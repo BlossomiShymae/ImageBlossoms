@@ -13,15 +13,18 @@ namespace ImageBlossoms.Views
 
 			var inputFolderPicker = new FilePicker { FileAction = Eto.FileAction.SelectFolder };
 			var outputFolderPicker = new FilePicker { FileAction = Eto.FileAction.SelectFolder };
+			var useOneFolderCheckBox = new CheckBox { Text = "Use same folder for output" };
 			inputFolderPicker.FilePathChanged += (s, e) => viewModel.InputFolder = inputFolderPicker.FilePath;
 			outputFolderPicker.FilePathChanged += (s, e) => viewModel.OutputFolder = outputFolderPicker.FilePath;
 
 			var scaleCheckBox = new CheckBox { Text = "Scale" };
-			var widthTextBox = new TextBox { PlaceholderText = "Width" };
-			var heightTextBox = new TextBox { PlaceholderText = "Height" };
+			var aspectRatioComboBox = new ComboBox { Text = "Aspect Ratio" };
+			var widthStepper = new NumericStepper { MinValue = 1 };
+			var heightStepper = new NumericStepper { MinValue = 1 };
 			scaleCheckBox.CheckedBinding.BindDataContext<MainFormViewModel>(c => c.IsScaled, DualBindingMode.TwoWay);
-			widthTextBox.TextBinding.BindDataContext<MainFormViewModel>(c => c.Width, DualBindingMode.TwoWay);
-			heightTextBox.TextBinding.BindDataContext<MainFormViewModel>(c => c.Height, DualBindingMode.TwoWay);
+
+			var consoleTextArea = new TextArea { Enabled = false };
+			var processingProgressBar = new ProgressBar { Value = 0 };
 
 			Content = new TableLayout
 			{
@@ -29,8 +32,10 @@ namespace ImageBlossoms.Views
 				Spacing = new Size(2, 2),
 				Rows =
 				{
+					processingProgressBar,
 					new TableRow("Select input folder"),
 					new TableRow(inputFolderPicker),
+					new TableRow(useOneFolderCheckBox),
 					new TableRow("Select output folder"),
 					new TableRow(outputFolderPicker),
 					new TableRow("Filters"),
@@ -42,11 +47,16 @@ namespace ImageBlossoms.Views
 						Items =
 						{
 							scaleCheckBox,
-							widthTextBox,
-							heightTextBox
+							aspectRatioComboBox,
+							new Label { Text = "Width" },
+							widthStepper,
+							new Label { Text = "Pixels" },
+							new Label { Text = "Height" },
+							heightStepper,
+							new Label { Text = "Pixels"}
 						}
 					}),
-					null,
+					consoleTextArea
 				}
 			};
 
