@@ -9,7 +9,19 @@ namespace ImageBlossoms.Views
 		public MainForm(MainFormViewModel viewModel)
 		{
 			Title = "ImageBlossoms";
-			MinimumSize = new Size(800, 600);
+			MinimumSize = new Size(600, 400);
+
+			var inputFolderPicker = new FilePicker { FileAction = Eto.FileAction.SelectFolder };
+			var outputFolderPicker = new FilePicker { FileAction = Eto.FileAction.SelectFolder };
+			inputFolderPicker.FilePathChanged += (s, e) => viewModel.InputFolder = inputFolderPicker.FilePath;
+			outputFolderPicker.FilePathChanged += (s, e) => viewModel.OutputFolder = outputFolderPicker.FilePath;
+
+			var scaleCheckBox = new CheckBox { Text = "Scale" };
+			var widthTextBox = new TextBox { PlaceholderText = "Width" };
+			var heightTextBox = new TextBox { PlaceholderText = "Height" };
+			scaleCheckBox.CheckedBinding.BindDataContext<MainFormViewModel>(c => c.IsScaled, DualBindingMode.TwoWay);
+			widthTextBox.TextBinding.BindDataContext<MainFormViewModel>(c => c.Width, DualBindingMode.TwoWay);
+			heightTextBox.TextBinding.BindDataContext<MainFormViewModel>(c => c.Height, DualBindingMode.TwoWay);
 
 			Content = new TableLayout
 			{
@@ -18,9 +30,9 @@ namespace ImageBlossoms.Views
 				Rows =
 				{
 					new TableRow("Select input folder"),
-					new TableRow(new FilePicker { FileAction = Eto.FileAction.SelectFolder }),
+					new TableRow(inputFolderPicker),
 					new TableRow("Select output folder"),
-					new TableRow(new FilePicker { FileAction = Eto.FileAction.SelectFolder }),
+					new TableRow(outputFolderPicker),
 					new TableRow("Filters"),
 					new TableRow(new StackLayout
 					{
@@ -29,18 +41,9 @@ namespace ImageBlossoms.Views
 						Spacing = 5,
 						Items =
 						{
-							new CheckBox
-							{
-								Text = "Scale"
-							},
-							new TextBox
-							{
-								PlaceholderText = "Width"
-							},
-							new TextBox
-							{
-								PlaceholderText = "Height"
-							}
+							scaleCheckBox,
+							widthTextBox,
+							heightTextBox
 						}
 					}),
 					null,
@@ -72,6 +75,9 @@ namespace ImageBlossoms.Views
 
 			// create toolbar			
 			ToolBar = new ToolBar { Items = { viewModel.ProcessCommand } };
+
+			// Set DataContext
+			DataContext = viewModel;
 		}
 	}
 }
