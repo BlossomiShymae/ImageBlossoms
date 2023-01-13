@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form
+	xmlns="http://schema.picoe.ca/eto.forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="clr-namespace:ImageBlossoms.Views;assembly=EtoApp.1"
+	Title="ImageBlossoms"
+	MinimumSize="600,400"
+	Padding="10"
+	>
+	<TableLayout Spacing="2,4">
+		<ProgressBar Value="{Binding ProgressValue, Mode=TwoWay}"/>
+		<Label>Select input folder</Label>
+		<FilePicker FileAction="SelectFolder" FilePath="{Binding InputFolder, Mode=TwoWay}"/>
+		<CheckBox>Use same folder for output</CheckBox>
+		<Label>Select output folder</Label>
+		<FilePicker FileAction="SelectFolder" FilePath="{Binding OutputFolder, Mode=TwoWay}"/>
+		<Label>Filters</Label>
+		<StackLayout Orientation="Horizontal" Spacing="5">
+			<CheckBox Checked="{Binding IsScaled, Mode=TwoWay}">Scale</CheckBox>
+			<ComboBox></ComboBox>
+			<Label>Width</Label>
+			<NumericStepper Value="{Binding Width, Mode=TwoWay}" />
+			<Label>Pixels</Label>
+			<Label>Height</Label>
+			<NumericStepper Value="{Binding Height, Mode=TwoWay}" />
+			<Label>Pixels</Label>
+		</StackLayout>
+		<TextArea Text="{Binding ConsoleText, Mode=TwoWay}"/>
+	</TableLayout>
+
+	<Form.Menu>
+		<MenuBar>
+			<SubMenuItem Text="&amp;File">
+				<ButtonMenuItem Text="Click Me!" Click="HandleClickMe" />
+			</SubMenuItem>
+			<MenuBar.ApplicationItems>
+				<ButtonMenuItem Text="Preferences.." Shortcut="{On Control+O, Mac=Application+Comma}" />
+			</MenuBar.ApplicationItems>
+			<MenuBar.QuitItem>
+				<ButtonMenuItem Text="Quit" Shortcut="CommonModifier+Q" Click="HandleQuit" />
+			</MenuBar.QuitItem>
+			<MenuBar.AboutItem>
+				<ButtonMenuItem Text="About..." Click="HandleAbout" />
+			</MenuBar.AboutItem>
+		</MenuBar>
+	</Form.Menu>
+	<Form.ToolBar>
+		<ToolBar>
+			<ButtonToolItem Text="Process" Command="{Binding ProcessCommand}"/>
+		</ToolBar>
+	</Form.ToolBar>
+</Form>

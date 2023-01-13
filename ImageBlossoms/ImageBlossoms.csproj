@@ -1,4 +1,4 @@
-﻿<Project Sdk="Eto.Forms/2.7.1">
+﻿<Project Sdk="Eto.Forms/2.7.2">
 
   <!--
     Set the BuildPlatform property to the Eto platform you wish to build for.
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageReference Include="Eto.Serialization.Xaml" Version="2.7.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
   </ItemGroup>
@@ -20,6 +21,16 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\MainForm.xeto.cs">
+      <DependentUpon>MainForm.xeto</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Eto.Forms" Version="2.7.2" />
   </ItemGroup>
 
 </Project>
