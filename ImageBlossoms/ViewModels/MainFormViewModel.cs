@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Eto.Forms;
-using ImageBlossoms.Events;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,9 +14,6 @@ namespace ImageBlossoms.ViewModels
 {
 	public partial class MainFormViewModel : ObservableObject
 	{
-		public event SignalEventSubscription ConsoleUpdate;
-		public event SimpleEventSubscription<ProgressBarUpdateEventArgs> ProgressBarUpdate;
-
 		public readonly Command AboutCommand = new() { MenuText = "About..." };
 		public readonly Command ClickMeCommand = new() { MenuText = "Click Me!", ToolBarText = "Click Me!" };
 		public readonly Command QuitCommand = new() { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
