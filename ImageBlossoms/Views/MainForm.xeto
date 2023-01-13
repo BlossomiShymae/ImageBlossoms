@@ -11,18 +11,18 @@
 		<ProgressBar Value="{Binding ProgressValue, Mode=TwoWay}"/>
 		<Label>Select input folder</Label>
 		<FilePicker FileAction="SelectFolder" FilePath="{Binding InputFolder, Mode=TwoWay}"/>
-		<CheckBox>Use same folder for output</CheckBox>
+		<CheckBox Checked="{Binding UseSameFolder, Mode=TwoWay}">Use same folder for output</CheckBox>
 		<Label>Select output folder</Label>
-		<FilePicker FileAction="SelectFolder" FilePath="{Binding OutputFolder, Mode=TwoWay}"/>
+		<FilePicker FileAction="SelectFolder" FilePath="{Binding OutputFolder, Mode=TwoWay}" Enabled="{Binding OutputFolderEnabled, Mode=TwoWay}"/>
 		<Label>Filters</Label>
 		<StackLayout Orientation="Horizontal" Spacing="5">
-			<CheckBox Checked="{Binding IsScaled, Mode=TwoWay}">Scale</CheckBox>
+			<CheckBox Checked="{Binding Scaled, Mode=TwoWay}">Scale</CheckBox>
 			<ComboBox></ComboBox>
 			<Label>Width</Label>
-			<NumericStepper Value="{Binding Width, Mode=TwoWay}" />
+			<NumericStepper Value="{Binding Width, Mode=TwoWay}" Enabled="{Binding WidthEnabled, Mode=TwoWay}"/>
 			<Label>Pixels</Label>
 			<Label>Height</Label>
-			<NumericStepper Value="{Binding Height, Mode=TwoWay}" />
+			<NumericStepper Value="{Binding Height, Mode=TwoWay}" Enabled="{Binding HeightEnabled, Mode=TwoWay}"/>
 			<Label>Pixels</Label>
 		</StackLayout>
 		<TextArea Text="{Binding ConsoleText, Mode=TwoWay}"/>

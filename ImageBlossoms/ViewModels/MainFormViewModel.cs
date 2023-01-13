@@ -25,11 +25,19 @@ namespace ImageBlossoms.ViewModels
 		[ObservableProperty]
 		private string _outputFolder;
 		[ObservableProperty]
-		private bool _isScaled = false;
+		private bool _useSameFolder = false;
+		[ObservableProperty]
+		private bool _outputFolderEnabled = true;
+		[ObservableProperty]
+		private bool _scaled = false;
 		[ObservableProperty]
 		private double _width;
 		[ObservableProperty]
+		private bool _widthEnabled = false;
+		[ObservableProperty]
 		private double _height;
+		[ObservableProperty]
+		private bool _heightEnabled = false;
 		[ObservableProperty]
 		private string _consoleText = "";
 
@@ -59,7 +67,7 @@ namespace ImageBlossoms.ViewModels
 				.Where(s => extensions.Any(ext => ext == Path.GetExtension(s))))
 			{
 				var image = Image.FromFile(file);
-				if (IsScaled)
+				if (Scaled)
 				{
 					var scaledImage = ResizeImage(image, (int)Width, (int)Height);
 					using MemoryStream memoryStream = new();
@@ -94,5 +102,16 @@ namespace ImageBlossoms.ViewModels
 
 		[RelayCommand]
 		private void Process() => ProcessImages();
+
+		partial void OnScaledChanged(bool value)
+		{
+			WidthEnabled = value;
+			HeightEnabled = value;
+		}
+
+		partial void OnUseSameFolderChanged(bool value)
+		{
+			OutputFolderEnabled = !value;
+		}
 	}
 }
