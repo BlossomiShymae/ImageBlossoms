@@ -74,17 +74,29 @@ namespace ImageBlossoms.ViewModels
 		private void ProcessImages()
 		{
 			ProgressValue = 0;
-			if (InputFolder == null || OutputFolder == null)
+			if (String.IsNullOrEmpty(InputFolder))
 			{
-				WriteConsole("Folder path must be selected before processing");
+				WriteConsole("Input folder must be selected");
 				return;
 			}
+			if (!UseSameFolder && String.IsNullOrEmpty(OutputFolder))
+			{
+				WriteConsole("Output folder must be selected");
+				return;
+			}
+
 			// Get images from input folder
 			var result = new List<string>();
 			string[] extensions = { ".png", ".jpg", ".jpeg" };
 			foreach (string file in Directory.EnumerateFiles(InputFolder, "*.*", SearchOption.AllDirectories)
 				.Where(s => extensions.Any(ext => ext == Path.GetExtension(s))))
 			{
+				string processedMagicId = ".blossoms";
+				if (file.Contains(processedMagicId + "."))
+				{
+					WriteConsole("Skipping processed image " + file);
+					continue;
+				}
 				var image = Image.FromFile(file);
 				if (Scaled)
 				{
@@ -92,7 +104,8 @@ namespace ImageBlossoms.ViewModels
 					using MemoryStream memoryStream = new();
 					scaledImage.Save(memoryStream, ImageFormat.Png);
 					var imageBytes = memoryStream.ToArray();
-					var path = Path.Combine(OutputFolder, Path.GetFileName(file));
+					var saveFolder = UseSameFolder ? InputFolder : OutputFolder;
+					var path = Path.Combine(saveFolder, $"{Path.GetFileNameWithoutExtension(file)}_{Width}x{Height}{processedMagicId}{Path.GetExtension(file)}");
 					File.WriteAllBytes(path, imageBytes);
 					WriteConsole("Image written to " + path);
 					ProgressValue = 100;
