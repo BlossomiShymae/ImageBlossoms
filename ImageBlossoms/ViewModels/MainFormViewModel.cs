@@ -14,10 +14,6 @@ namespace ImageBlossoms.ViewModels
 {
 	public partial class MainFormViewModel : ObservableObject
 	{
-		public readonly Command AboutCommand = new() { MenuText = "About..." };
-		public readonly Command ClickMeCommand = new() { MenuText = "Click Me!", ToolBarText = "Click Me!" };
-		public readonly Command QuitCommand = new() { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
-
 		public enum AspectRatio
 		{
 			None,
@@ -56,7 +52,6 @@ namespace ImageBlossoms.ViewModels
 
 		public MainFormViewModel()
 		{
-			QuitCommand.Executed += (sender, e) => Application.Instance.Quit();
 			AspectRatios.Add("None", AspectRatio.None);
 			AspectRatios.Add("1:1 (Square)", AspectRatio.Square);
 			AspectRatios.Add("4:3", AspectRatio.FourThree);
