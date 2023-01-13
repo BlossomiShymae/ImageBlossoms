@@ -30,12 +30,6 @@
 
 	<Form.Menu>
 		<MenuBar>
-			<SubMenuItem Text="&amp;File">
-				<ButtonMenuItem Text="Click Me!" Click="HandleClickMe" />
-			</SubMenuItem>
-			<MenuBar.ApplicationItems>
-				<ButtonMenuItem Text="Preferences.." Shortcut="{On Control+O, Mac=Application+Comma}" />
-			</MenuBar.ApplicationItems>
 			<MenuBar.QuitItem>
 				<ButtonMenuItem Text="Quit" Shortcut="CommonModifier+Q" Click="HandleQuit" />
 			</MenuBar.QuitItem>

@@ -17,12 +17,6 @@ namespace ImageBlossoms.Views
 			aspectRatios.DataStore = viewModel.AspectRatios.Keys.ToList();
 		}
 
-		protected void HandleClickMe(object sender, EventArgs e)
-		{
-			MessageBox.Show("I was clicked!");
-
-		}
-
 		protected void HandleAbout(object sender, EventArgs e)
 		{
 			new AboutDialog().ShowDialog(this);
