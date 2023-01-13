@@ -17,7 +17,7 @@
 		<Label>Filters</Label>
 		<StackLayout Orientation="Horizontal" Spacing="5">
 			<CheckBox Checked="{Binding Scaled, Mode=TwoWay}">Scale</CheckBox>
-			<ComboBox></ComboBox>
+			<ComboBox ReadOnly="True" ID="comboAspectRatio" SelectedKey="{Binding SelectedAspectRatio, Mode=TwoWay}"/>
 			<Label>Width</Label>
 			<NumericStepper Value="{Binding Width, Mode=TwoWay}" Enabled="{Binding WidthEnabled, Mode=TwoWay}"/>
 			<Label>Pixels</Label>

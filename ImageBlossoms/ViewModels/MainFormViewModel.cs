@@ -18,6 +18,17 @@ namespace ImageBlossoms.ViewModels
 		public readonly Command ClickMeCommand = new() { MenuText = "Click Me!", ToolBarText = "Click Me!" };
 		public readonly Command QuitCommand = new() { MenuText = "Quit", Shortcut = Application.Instance.CommonModifier | Keys.Q };
 
+		public enum AspectRatio
+		{
+			None,
+			Square,
+			FourThree,
+			ThreeTwo,
+			SixteenNine,
+			ThreeOne
+		}
+		public Dictionary<string, AspectRatio> AspectRatios = new();
+
 		[ObservableProperty]
 		private int _progressValue;
 		[ObservableProperty]
@@ -30,6 +41,8 @@ namespace ImageBlossoms.ViewModels
 		private bool _outputFolderEnabled = true;
 		[ObservableProperty]
 		private bool _scaled = false;
+		[ObservableProperty]
+		private string _selectedAspectRatio = null;
 		[ObservableProperty]
 		private double _width;
 		[ObservableProperty]
@@ -44,6 +57,12 @@ namespace ImageBlossoms.ViewModels
 		public MainFormViewModel()
 		{
 			QuitCommand.Executed += (sender, e) => Application.Instance.Quit();
+			AspectRatios.Add("None", AspectRatio.None);
+			AspectRatios.Add("1:1 (Square)", AspectRatio.Square);
+			AspectRatios.Add("4:3", AspectRatio.FourThree);
+			AspectRatios.Add("16:9", AspectRatio.SixteenNine);
+			AspectRatios.Add("3:2", AspectRatio.ThreeTwo);
+			AspectRatios.Add("3:1", AspectRatio.ThreeOne);
 		}
 
 		private static string GetTime() => DateTime.Now.ToString("s");
@@ -112,6 +131,34 @@ namespace ImageBlossoms.ViewModels
 		partial void OnUseSameFolderChanged(bool value)
 		{
 			OutputFolderEnabled = !value;
+		}
+
+		partial void OnSelectedAspectRatioChanged(string value)
+		{
+			if (SelectedAspectRatio == null) return;
+			var aspectRatio = AspectRatios.GetValueOrDefault(SelectedAspectRatio);
+			switch (aspectRatio)
+			{
+				case AspectRatio.None:
+					break;
+				case AspectRatio.Square:
+					Height = Width;
+					break;
+				case AspectRatio.FourThree:
+					Height = (3.0 / 4.0) * Width;
+					break;
+				case AspectRatio.ThreeTwo:
+					Height = (2.0 / 3.0) * Width;
+					break;
+				case AspectRatio.SixteenNine:
+					Height = (9.0 / 16.0) * Width;
+					break;
+				case AspectRatio.ThreeOne:
+					Height = (1.0 / 3.0) * Width;
+					break;
+				default:
+					break;
+			}
 		}
 	}
 }

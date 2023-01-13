@@ -2,6 +2,7 @@
 using Eto.Serialization.Xaml;
 using ImageBlossoms.ViewModels;
 using System;
+using System.Linq;
 
 namespace ImageBlossoms.Views
 {
@@ -11,6 +12,9 @@ namespace ImageBlossoms.Views
 		{
 			DataContext = viewModel;
 			XamlReader.Load(this);
+
+			var aspectRatios = FindChild<ComboBox>("comboAspectRatio");
+			aspectRatios.DataStore = viewModel.AspectRatios.Keys.ToList();
 		}
 
 		protected void HandleClickMe(object sender, EventArgs e)
