@@ -8,6 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using Icon = Eto.Drawing.Icon;
 using WrapMode = System.Drawing.Drawing2D.WrapMode;
 
 namespace ImageBlossoms.ViewModels
@@ -24,6 +25,7 @@ namespace ImageBlossoms.ViewModels
 			ThreeOne
 		}
 		public Dictionary<string, AspectRatio> AspectRatios = new();
+		public Icon ApplicationIcon;
 
 		[ObservableProperty]
 		private int _progressValue;
@@ -52,6 +54,7 @@ namespace ImageBlossoms.ViewModels
 
 		public MainFormViewModel()
 		{
+			ApplicationIcon = Icon.FromResource("ImageBlossoms.Resources.ImageBlossoms.png");
 			AspectRatios.Add("None", AspectRatio.None);
 			AspectRatios.Add("1:1 (Square)", AspectRatio.Square);
 			AspectRatios.Add("4:3", AspectRatio.FourThree);

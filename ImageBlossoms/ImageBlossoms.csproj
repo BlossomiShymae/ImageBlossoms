@@ -8,8 +8,27 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <ApplicationIcon>ImageBlossoms.ico</ApplicationIcon>
 
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\ImageBlossoms.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ImageBlossoms.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Include="Resources\ImageBlossoms.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\ImageBlossoms.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />

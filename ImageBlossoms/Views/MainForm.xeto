@@ -6,6 +6,7 @@
 	Title="ImageBlossoms"
 	MinimumSize="600,400"
 	Padding="10"
+	Icon="{Binding ApplicationIcon}"
 	>
 	<TableLayout Spacing="2,4">
 		<ProgressBar Value="{Binding ProgressValue, Mode=TwoWay}"/>
