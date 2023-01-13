@@ -21,6 +21,7 @@ namespace ImageBlossoms.Views
 		{
 			var aboutDialog = new AboutDialog
 			{
+				ProgramName = "🌸ImageBlossoms",
 				Website = new("https://github.com/BlossomiShymae/ImageBlossoms"),
 				WebsiteLabel = "GitHub webpage",
 				ProgramDescription = new("A simple batch image processor with blossoming transformations.\nMade with love, bees, and kitties! <3"),
