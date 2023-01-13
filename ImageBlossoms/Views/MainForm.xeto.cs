@@ -19,7 +19,15 @@ namespace ImageBlossoms.Views
 
 		protected void HandleAbout(object sender, EventArgs e)
 		{
-			new AboutDialog().ShowDialog(this);
+			var aboutDialog = new AboutDialog
+			{
+				Website = new("https://github.com/BlossomiShymae/ImageBlossoms"),
+				WebsiteLabel = "GitHub webpage",
+				ProgramDescription = new("A simple batch image processor with blossoming transformations.\nMade with love, bees, and kitties! <3"),
+				Developers = new[] { "Blossomi Shymae" },
+				License = new("GNU General Public License v3.0"),
+			};
+			aboutDialog.ShowDialog(this);
 		}
 
 		protected void HandleQuit(object sender, EventArgs e)
